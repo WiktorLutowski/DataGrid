@@ -18,7 +18,7 @@
                         </Style>
                     </DataGridTextColumn.ElementStyle>
                 </DataGridTextColumn>
-                <DataGridTextColumn Header="Magazyn" Binding="{Binding Magazyn}" />
+                <DataGridComboBoxColumn x:Name="nazwaMagazynu" Header="Magazyn" SelectedItemBinding="{Binding Magazyn}" />
             </DataGrid.Columns>
         </DataGrid>
     </Grid>
