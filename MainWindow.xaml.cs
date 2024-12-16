@@ -2,7 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,7 +14,6 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using System.Xml.Linq;
 
 namespace DataGrid
 {
@@ -25,29 +23,25 @@ namespace DataGrid
 
     public partial class MainWindow : Window
     {
-        private string plik1 = @"..\..\data\Produkty.xml";
-        // Plik źródłowy
-        private string plik2 = @"..\..\data\Produkty2.xml"; // Plik wynikowy
-        private XElement wykazProduktow;
-
+        private ObservableCollection<Produkt> ListaProduktow = null;
         public MainWindow()
         {
             InitializeComponent();
             PrzygotujWiazanie();
+
         }
         private void PrzygotujWiazanie()
         {
-            if (File.Exists(plik1))
-                wykazProduktow = XElement.Load(plik1); //Załadowanie danych z pliku
+            ListaProduktow = new ObservableCollection<Produkt>();
+            ListaProduktow.Add(new Produkt("01-11", "ołówek", 8, "Katowice 1", new Uri(@"pack://application:,,,/Zdjecia/olowek.jpg"))); 
+            ListaProduktow.Add(new Produkt("PW-20", "pióro wieczne", 75, "Katowice 2", new Uri(@"pack://application:,,,/Zdjecia/pioro.jpg")));
+            ListaProduktow.Add(new Produkt("DZ-10", "długopis żelowy", 1121, "Katowice 1", new Uri(@"pack://application:,,,/Zdjecia/dlugopis.jpg")));
+            ListaProduktow.Add(new Produkt("DZ-12", "długopis kulkowy", 280, "Katowice 2", new Uri(@"pack://application:,,,/Zdjecia/dlugopis.jpg")));
+            gridProdukty.ItemsSource = ListaProduktow;
 
-            gridProdukty.DataContext = wykazProduktow;
 
-            ObservableCollection<string> ListaMagazynow = new ObservableCollection<string>() { "Katowice 1", "Katowice 2", "Gliwice 1" };
+            ObservableCollection<string> ListaMagazynow = new ObservableCollection<string>() { "Katowice 1", "Katowice 2", "Gliwice 1" }; 
             nazwaMagazynu.ItemsSource = ListaMagazynow;
-        }
-        private void btnZapisz_Click(object sender, RoutedEventArgs e)
-        {
-            wykazProduktow.Save(plik2); //Zapisanie danych do pliku wynikowego MessageBox.Show("Pomyślnie zapisano dane do pliku");
         }
     }
 }

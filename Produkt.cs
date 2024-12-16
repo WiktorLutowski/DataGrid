@@ -13,13 +13,15 @@ namespace DataBinding
         public string Nazwa { get; set; }
         public int LiczbaSztuk { get; set; }
         public string Magazyn { get; set; }
+        public Uri Zdjecie { get; set; }
 
-        public Produkt(string sym, string naz, int szt, string mag)
+        public Produkt(string sym, string naz, int szt, string mag, Uri zdj)
         {
             Symbol = sym;
             Nazwa = naz;
             LiczbaSztuk = szt;
             Magazyn = mag;
+            Zdjecie = zdj;
         }
 
         public override string ToString()
