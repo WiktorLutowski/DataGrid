@@ -28,7 +28,16 @@
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
             </DataGrid.Columns>
-            
+
+            <DataGrid.RowDetailsTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Margin="10" Text="Opis produktu:"/>
+                        <TextBox Margin="10" Text="{Binding Path=Opis}" TextWrapping="Wrap" FontWeight="Bold" Foreground="BlueViolet" Width="150"/>
+                        <Button x:Name="btnZdjecie" Margin="10" Click="btnZdjecie_Click" Content="Dodaj lub zmień zdjęcie" Height="30"/>
+                    </StackPanel>
+                </DataTemplate>
+            </DataGrid.RowDetailsTemplate>
         </DataGrid>
     </Grid>
 </Window>

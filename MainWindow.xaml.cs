@@ -33,15 +33,32 @@ namespace DataGrid
         private void PrzygotujWiazanie()
         {
             ListaProduktow = new ObservableCollection<Produkt>();
-            ListaProduktow.Add(new Produkt("01-11", "ołówek", 8, "Katowice 1", new Uri(@"pack://application:,,,/Zdjecia/olowek.jpg"))); 
-            ListaProduktow.Add(new Produkt("PW-20", "pióro wieczne", 75, "Katowice 2", new Uri(@"pack://application:,,,/Zdjecia/pioro.jpg")));
-            ListaProduktow.Add(new Produkt("DZ-10", "długopis żelowy", 1121, "Katowice 1", new Uri(@"pack://application:,,,/Zdjecia/dlugopis.jpg")));
-            ListaProduktow.Add(new Produkt("DZ-12", "długopis kulkowy", 280, "Katowice 2", new Uri(@"pack://application:,,,/Zdjecia/dlugopis.jpg")));
+            ListaProduktow.Add(new Produkt("01-11", "ołówek", 8, "Katowice 1", new Uri(@"pack://application:,,,/Zdjecia/olowek.jpg"), "Opis 1"));
+            ListaProduktow.Add(new Produkt("PW-20", "pióro wieczne", 75, "Katowice 2", new Uri(@"pack://application:,,,/Zdjecia/pioro.jpg"), "Opis 2"));
+            ListaProduktow.Add(new Produkt("DZ-10", "długopis żelowy", 1121, "Katowice 1", new Uri(@"pack://application:,,,/Zdjecia/dlugopis.jpg"), "Opis 3"));
+            ListaProduktow.Add(new Produkt("DZ-12", "długopis kulkowy", 280, "Katowice 2", new Uri(@"pack://application:,,,/Zdjecia/dlugopis.jpg"), "Opis 4"));
             gridProdukty.ItemsSource = ListaProduktow;
 
 
-            ObservableCollection<string> ListaMagazynow = new ObservableCollection<string>() { "Katowice 1", "Katowice 2", "Gliwice 1" }; 
+            ObservableCollection<string> ListaMagazynow = new ObservableCollection<string>() { "Katowice 1", "Katowice 2", "Gliwice 1" };
             nazwaMagazynu.ItemsSource = ListaMagazynow;
+        }
+
+
+        private void btnZdjecie_Click(object sender, RoutedEventArgs e)
+        {
+            Microsoft.Win32.OpenFileDialog dialog = new Microsoft.Win32.OpenFileDialog();
+            dialog.Title = "Wybierz zdjęcie";
+            dialog.Filter = "Image files (*.jpg,*.png;*.jpeg)|*.jpg;*.png;*.jpeg|A11 files (*.*)|*.*";
+            dialog.InitialDirectory = @"C:\temp\";
+            if (dialog.ShowDialog() == true)
+            {
+                (gridProdukty.SelectedItem as Produkt).Zdjecie = new Uri(dialog.FileName);
+                gridProdukty.CommitEdit(DataGridEditingUnit.Cell, true);
+                gridProdukty.CommitEdit();
+                CollectionViewSource.GetDefaultView(gridProdukty.
+                ItemsSource).Refresh();
+            }
         }
     }
 }

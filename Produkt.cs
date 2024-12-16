@@ -14,19 +14,17 @@ namespace DataBinding
         public int LiczbaSztuk { get; set; }
         public string Magazyn { get; set; }
         public Uri Zdjecie { get; set; }
+        public string Opis { get; set; }
 
-        public Produkt(string sym, string naz, int szt, string mag, Uri zdj)
+        public Produkt(string sym, string naz, int szt, string mag, Uri zdj, string opis)
         {
             Symbol = sym;
             Nazwa = naz;
             LiczbaSztuk = szt;
             Magazyn = mag;
             Zdjecie = zdj;
-        }
+            Opis = opis;
 
-        public override string ToString()
-        {
-            return String.Format("{0} {1} {2} {3}", Symbol, Nazwa, LiczbaSztuk, Magazyn);
         }
     }
 }
