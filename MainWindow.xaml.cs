@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -42,6 +43,9 @@ namespace DataGrid
 
             ObservableCollection<string> ListaMagazynow = new ObservableCollection<string>() { "Katowice 1", "Katowice 2", "Gliwice 1" };
             nazwaMagazynu.ItemsSource = ListaMagazynow;
+
+            ICollectionView widok = CollectionViewSource.GetDefaultView(gridProdukty.ItemsSource);
+            widok.GroupDescriptions.Add(new PropertyGroupDescription("Magazyn"));
         }
 
 

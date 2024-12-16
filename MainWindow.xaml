@@ -38,6 +38,32 @@
                     </StackPanel>
                 </DataTemplate>
             </DataGrid.RowDetailsTemplate>
+
+            <DataGrid.GroupStyle>
+                <GroupStyle>
+                    <GroupStyle.ContainerStyle>
+                        <Style TargetType="{x:Type GroupItem}">
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="{x:Type GroupItem}">
+                                        <Expander>
+                                            <Expander.Header>
+                                                <StackPanel Orientation="Horizontal">
+                                                    <TextBlock Text="Magazyn:" Margin="5" />
+                                                    <TextBlock Text="{Binding Path-Name}" Margin="5" FontWeight="Bold" Foreground="Blue" />
+                                                    <TextBlock Text="Liczba produktów:" Margin="5"/>
+                                                    <TextBlock Text="{Binding Path=ItemCount}" Margin="5" FontWeight="Bold" Foreground="Blue"/>
+                                                </StackPanel>
+                                            </Expander.Header>
+                                            <ItemsPresenter/>
+                                        </Expander>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </GroupStyle.ContainerStyle>
+                </GroupStyle>
+            </DataGrid.GroupStyle>
         </DataGrid>
     </Grid>
 </Window>
